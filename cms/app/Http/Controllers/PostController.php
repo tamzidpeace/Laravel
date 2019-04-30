@@ -85,4 +85,11 @@ class PostController extends Controller
     {
         //
     }
+
+    //custom function
+
+    public function contact()
+    { 
+        return view('pages.contact');
+    }
 }

@@ -34,3 +34,6 @@ Route::get('/post/{data}', 'PostController@index');
 //resource route/ controller
 
 Route::resource('posts', 'PostController');
+
+// route for custom function
+Route::get('/contact', 'PostController@contact');
