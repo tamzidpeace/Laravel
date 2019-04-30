@@ -30,3 +30,7 @@ Route::get('admin/posts/example', array ( 'as' => 'admin.home' ,function () {
 //controller route
 
 Route::get('/post/{data}', 'PostController@index');
+
+//resource route/ controller
+
+Route::resource('posts', 'PostController');
