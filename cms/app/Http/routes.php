@@ -26,3 +26,7 @@ Route::get('/post/{id}/{title}', function ($id, $title) {
 Route::get('admin/posts/example', array ( 'as' => 'admin.home' ,function () {
     return "123";
 }));
+
+//controller route
+
+Route::get('/post/{data}', 'PostController@index');
