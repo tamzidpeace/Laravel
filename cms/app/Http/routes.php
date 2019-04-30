@@ -37,3 +37,6 @@ Route::resource('posts', 'PostController');
 
 // route for custom function
 Route::get('/contact', 'PostController@contact');
+
+// passing data to view route
+Route::get('/mPost/{id}/{name}', 'PostController@post');
