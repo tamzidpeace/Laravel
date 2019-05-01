@@ -131,4 +131,28 @@ Route::get('/basicupdate', function() {
 
 });
 
+//mass assignment insert
 
+Route::get('/create', function() {
+    Post::create(['title'=>'test 2', 'body'=>'this is test number 2']);
+    return "mass assignment";
+});
+
+// ORM update
+Route::get('/basicupdate', function() {
+    Post::where('id',2)->where('is_admin', 0)->update(['title'=>'orm title', 'body' => 'this is body']);
+    return "updated";
+});
+
+//ORM delete
+Route::get('/basicdelete', function() {
+    $post = Post::find(2);  
+    $post->delete();
+    /* 
+    other ways:
+        Post::destroy(2);
+        Post::destroy([2,3]);
+        Post::where(conditon)->delete();
+    */
+    return "deleted";
+});
