@@ -12,6 +12,7 @@
 */
 
 use App\Post;
+use App\User;
 
 Route::get('/', function () {
     return view('welcome');
@@ -182,4 +183,33 @@ Route::get('/forceDelete', function() {
     //Post::withTrashed()->where('id', 4)->forceDelete();
     Post::withTrashed()->forceDelete();
     return "force deleted";
+});
+
+// Eloquent Relationship
+
+//hasOne relation or one to one relation
+Route::get('/user/{id}/post', function($id) {
+    return User::find($id)->post->body;
+});
+
+// reverse process
+Route::get('/mpost/{id}/user', function($id){
+    return Post::find($id)->user->name;
+});
+
+//one to many
+Route::get('/mPosts', function() {
+    $user = User::find(1);
+
+    foreach($user->posts as $post) {
+        echo $post->body;
+    }
+}); 
+
+//many to many relations
+Route::get('user/{id}/role', function($id) {
+    $user = User::find($id)->roles;
+    foreach($user as $role) {
+        echo $role->name;
+    }
 });
