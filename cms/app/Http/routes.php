@@ -156,3 +156,30 @@ Route::get('/basicdelete', function() {
     */
     return "deleted";
 });
+
+//soft delete
+Route::get('/softDelete/{id}', function($id) {
+    Post::find($id)->delete();
+    return "softDeleted";
+});
+
+//read soft delete
+Route::get('/readSoftDelete', function() {
+     $post = Post::withTrashed()->where('id', 3)->get();
+     return $post;
+});
+
+// restore
+
+Route::get('/restore', function() {
+    //Post::withTrashed()->where('id', 3)->restore();
+    Post::withTrashed()->restore();
+    return "restored";
+});
+
+//permanent delete
+Route::get('/forceDelete', function() {
+    //Post::withTrashed()->where('id', 4)->forceDelete();
+    Post::withTrashed()->forceDelete();
+    return "force deleted";
+});
