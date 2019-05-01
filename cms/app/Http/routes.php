@@ -11,6 +11,8 @@
 |
 */
 
+use App\Post;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -73,3 +75,60 @@ Route::get('/delete', function () {
     $deleted = DB::delete('delete from posts where id = ?', [1]);
     return $deleted;
 });
+
+//Eloquent ORM
+
+//read data
+Route::get('/find', function() {
+    //$posts = Post::all();
+    $posts = Post::find(2); // 2 is id here
+
+    return $posts->body;
+});
+
+// 2nd way to read data
+Route::get('/find2', function() {
+    $posts = Post::where('title', 'test0')->orderBy('id','desc')->get();
+    foreach($posts as $post) {
+        echo $post->title . '<br>';
+    }
+
+    //return $posts;
+});
+
+//3rd way
+Route::get('/find3', function(){
+    $posts = Post::findOrFail(2); // 2 is id here
+    return $posts;
+});
+
+
+// insert
+
+Route::get('/basicinsert', function() {
+    $post = new Post;
+
+    $post->title = "test 1";
+    $post->body = "this is test 1";
+
+    $post->save();
+
+    return "inserted";
+
+});
+
+//update
+
+Route::get('/basicupdate', function() {
+    $post = Post::find(4);
+
+    $post->title = "test 1";
+    $post->body = "test for update";
+
+    $post->save();
+
+    return "updated";
+
+});
+
+
