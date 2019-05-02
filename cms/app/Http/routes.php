@@ -46,34 +46,34 @@ Route::get('/contact', 'PostController@contact');
 Route::get('/mPost/{id}/{name}', 'PostController@post');
 
 //inserting using raw sql queries
-Route::get('/insert', function () { 
+Route::get('/insert', function () {
     DB::insert('insert into posts(title,body) values(?,?)',['test0','test number 0']);
     return "inserted";
 });
 
 
 //read using raw sql queries
-Route::get('/read', function () { 
+Route::get('/read', function () {
     $result = DB::select('select * from posts');
-    
+
     foreach($result as $post) {
         return $post->title . " " . $post->body;
     }
 
     //return $result;
-    
+
 });
 
 //update using raw sql queries
-Route::get('/update', function () { 
-    
+Route::get('/update', function () {
+
     $updated = DB::update('update posts set title="new title" where id = ?', [1]);
     return $updated;
 });
 
 //delete using raw sql queries
-Route::get('/delete', function () { 
-    
+Route::get('/delete', function () {
+
     $deleted = DB::delete('delete from posts where id = ?', [1]);
     return $deleted;
 });
@@ -148,9 +148,9 @@ Route::get('/basicupdate', function() {
 
 //ORM delete
 Route::get('/basicdelete', function() {
-    $post = Post::find(2);  
+    $post = Post::find(2);
     $post->delete();
-    /* 
+    /*
     other ways:
         Post::destroy(2);
         Post::destroy([2,3]);
@@ -205,7 +205,7 @@ Route::get('/mPosts', function() {
     foreach($user->posts as $post) {
         echo $post->body;
     }
-}); 
+});
 
 //many to many relations
 Route::get('user/{id}/role', function($id) {
@@ -229,5 +229,14 @@ Route::get('/user/country', function() {
 
         $country = Country::find(2)->posts;
 
-        return $country;   
+        return $country;
+});
+
+// polymorpic relations
+Route::get('/photo', function(){
+    $user = User::find(1);
+
+    foreach($user->photos as $photo) {
+        return $photo->path;
+    }
 });
