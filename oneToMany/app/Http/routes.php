@@ -49,3 +49,10 @@ Route::get('/update', function() {
     // $post->save();
     
 });
+
+//delete
+Route::get('/delete', function() {
+    $user = User::findOrFail(2);
+    $user->posts()->where('user_id', 2)->delete();
+    return 'deleted';
+});
