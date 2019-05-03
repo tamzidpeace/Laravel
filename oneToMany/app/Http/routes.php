@@ -21,7 +21,17 @@ Route::get('/', function () {
 Route::get('/insert', function() {
     $user = User::findOrFail(2);
     $post = new Post(['title'=>'test', 'content'=>'test 2']);
-    $user->post()->save($post);
+    $user->posts()->save($post);
 
     return 'inserted';
+});
+
+//read
+Route::get('/read', function() {
+    $user = User::findOrFail(1);
+    
+    foreach($user->posts as $post) {
+        echo $post->content . '<br>';
+    }
+
 });
