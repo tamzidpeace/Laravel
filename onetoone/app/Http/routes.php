@@ -38,10 +38,16 @@ Route::get('/update', function () {
     // echo $address->name;
 
     // can change value
-    $address = Address::where('user_id', 1)->first();
-    $address->name = 'a';
-    $address->save();
-    echo $address->name;
+    // $address = Address::where('user_id', 1)->first();
+    // $address->name = 'a';
+    // $address->save();
+    // echo $address->name;
+
+    // -- trying new way and it work
+    $user = User::findOrFail(1);
+    $user->address()->where('user_id', 1)->update(['name'=>'dhaka']);
+    return 'updated';
+
 });
 
 // read
