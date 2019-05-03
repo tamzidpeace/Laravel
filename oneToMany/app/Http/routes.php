@@ -35,3 +35,15 @@ Route::get('/read', function() {
     }
 
 });
+
+//update
+Route::get('/update', function() {
+    $user = User::findOrFail(1);
+
+    // $post = Post::where('user_id', 1)->first();
+    // $post->title = 't';
+    // $post->content = 'tt';
+    // $post->save();
+    $user->posts()->where('user_id', 1)->update(['title'=>'tt', 'content'=>'ttt']);
+    echo 'updated';
+});
