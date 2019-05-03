@@ -17,12 +17,27 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/insert/{id}', function($id) {
+Route::get('/insert/{id}', function ($id) {
     $user = User::findOrFail($id);
-    $address = new Address(['name'=>'cumilla']);
+    $address = new Address(['name' => 'cumilla']);
 
     $user->address()->save($address);
     return 'data inserted';
 });
 
+Route::get('/update', function () {
+    //$address = Address::findOrFail($id);
+    // $address->name = 'Dahaka';
+    // $address->save();
+    //return $address;
 
+    // --read data
+    // $address = DB::table('addresses')->where('user_id', 2)->first();
+    // echo $address->name;
+
+    // can change value
+    $address = Address::where('user_id', 1)->first();
+    $address->name = 'a';
+    $address->save();
+    echo $address->name;
+});
