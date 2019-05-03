@@ -17,6 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//insert
 Route::get('/insert/{id}', function ($id) {
     $user = User::findOrFail($id);
     $address = new Address(['name' => 'cumilla']);
@@ -25,6 +26,7 @@ Route::get('/insert/{id}', function ($id) {
     return 'data inserted';
 });
 
+//update
 Route::get('/update', function () {
     //$address = Address::findOrFail($id);
     // $address->name = 'Dahaka';
@@ -40,4 +42,20 @@ Route::get('/update', function () {
     $address->name = 'a';
     $address->save();
     echo $address->name;
+});
+
+// read
+Route::get('/read', function() {
+    $user = User::findOrFail(1);
+    echo $user->address->name;
+});
+
+// delete
+Route::get('/delete', function() {
+    $user = User::findOrFail(2);
+    // delete all match value
+    $user->address()->delete();
+    // delete a single value
+    $user->address()->delete();
+    echo 'deleted';
 });
