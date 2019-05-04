@@ -52,6 +52,7 @@ class PostController extends Controller
         // $post->save();
 
         //return $request->title;
+        
         Post::create($request->all());
         return redirect('/posts');
     }
