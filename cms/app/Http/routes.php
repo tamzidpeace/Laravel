@@ -19,6 +19,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+Route::resource('posts', 'PostController');
+
+/*
 // route with parameter
 
 Route::get('/post/{id}/{title}', function ($id, $title) {
@@ -38,6 +42,7 @@ Route::get('/post/{data}', 'PostController@index');
 //resource route/ controller
 
 Route::resource('posts', 'PostController');
+
 
 // route for custom function
 Route::get('/contact', 'PostController@contact');
@@ -156,9 +161,9 @@ Route::get('/basicdelete', function() {
         Post::destroy([2,3]);
         Post::where(conditon)->delete();
     */
-    return "deleted";
-});
-
+    //return "deleted";
+//});
+/*
 //soft delete
 Route::get('/softDelete/{id}', function($id) {
     Post::find($id)->delete();
@@ -240,3 +245,10 @@ Route::get('/photo', function(){
         return $photo->path;
     }
 });
+
+//crud application(form validation)
+
+// Route::get('/formPosts', function() {
+//     return view('posts.create');
+// });  
+*/

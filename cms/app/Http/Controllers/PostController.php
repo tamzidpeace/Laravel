@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Post;
 use App\Http\Requests;
 
 class PostController extends Controller
@@ -13,10 +13,13 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($data)
+    public function index()
     {
         //
-        echo $data;
+        $posts = Post::all();
+
+        return view('posts.index', compact('posts'));
+        //return view('posts.index');
     }
 
     /**
@@ -27,6 +30,7 @@ class PostController extends Controller
     public function create()
     {
         //
+        return view('posts.create');
     }
 
     /**
@@ -38,6 +42,18 @@ class PostController extends Controller
     public function store(Request $request)
     {
         //
+        //return 1234;
+        // $post = new Post;
+        // $post->title = $request->title;
+        // $post->content = 'test 1';
+        // $post->user_id = 1;
+        // $post->comment = 'test 1 comment';
+        // $post->is_admin = 0;
+        // $post->save();
+
+        //return $request->title;
+        Post::create($request->all());
+        return redirect('/posts');
     }
 
     /**
@@ -49,7 +65,8 @@ class PostController extends Controller
     public function show($id)
     {
         //
-        return "arafat";
+        $post = Post::findOrFail($id);
+        return view('posts.show', compact('post'));
     }
 
     /**
@@ -61,6 +78,8 @@ class PostController extends Controller
     public function edit($id)
     {
         //
+        $post = Post::findOrFail($id);
+        return view('posts.edit', compact('post'));
     }
 
     /**
@@ -73,6 +92,9 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $post = Post::findOrFail($id);
+        $post->update($request->all());
+        return redirect('/posts');
     }
 
     /**
@@ -84,17 +106,20 @@ class PostController extends Controller
     public function destroy($id)
     {
         //
+        Post::whereId($id)->delete();
+        return redirect('/posts');
     }
 
     //custom function
 
     public function contact()
-    { 
+    {
         return view('pages.contact');
     }
 
-    public function post($id, $name) {
+    public function post($id, $name)
+    {
         //return view('pages.post')->with('id', $id); 
-        return view('pages.post', compact('id','name'));
+        return view('pages.post', compact('id', 'name'));
     }
 }
