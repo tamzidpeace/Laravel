@@ -14,6 +14,8 @@
 use App\Post;
 use App\User;
 use App\Country;
+use Carbon\Carbon;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -21,12 +23,23 @@ Route::get('/', function () {
 
 Route::resource('posts', 'PostController');
 
-Route::group(['middleware'=>''], function() {
+Route::get('/dates', function () {
+    $date = new DateTime;
+    echo $date->format('m-d-y') . '<br>';
 
-     
-   
-
+    echo Carbon::now()->day;
 });
+
+Route::get('/getName', function() {
+    $user = User::find(1);
+    echo $user->name;
+});
+
+Route::get('/', function () {
+    
+});
+
+Route::group(['middleware' => ''], function () { });
 
 
 
