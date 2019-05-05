@@ -52,7 +52,14 @@ class PostController extends Controller
         // $post->save();
 
         //return $request->title;
-        
+
+
+        // validation rules
+        $this->validate($request, [
+            'title' => 'required',
+        ]);
+    
+
         Post::create($request->all());
         return redirect('/posts');
     }
