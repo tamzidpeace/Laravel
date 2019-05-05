@@ -35,8 +35,11 @@ Route::get('/getName', function() {
     echo $user->name;
 });
 
-Route::get('/', function () {
-    
+// mutators
+Route::get('/setname', function () {
+    $user = User::find(1);
+    $user->name = "tom";
+    $user->save();
 });
 
 Route::group(['middleware' => ''], function () { });

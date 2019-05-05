@@ -43,4 +43,14 @@ class User extends Authenticatable
     public function getNameAttribute($value) {
         return ucfirst($value);
     }
+
+    /**
+     * @param $value
+     * Mutators
+     */
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = ucfirst($value);
+    }
+
 }
