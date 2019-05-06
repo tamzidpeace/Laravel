@@ -39,7 +39,7 @@
         <div class="container">
             <div class="content">
                 <div class="title">Laravel 5</div>
-                <a href="postsf">create a post</a>
+                <a href="posts">create a post</a>
             </div>
         </div>
     
