@@ -11,6 +11,7 @@ class Post extends Model
     //protected $table = 'posts';
 
     use SoftDeletes;
+    public $directory = "/images/";
 
     protected $dates = ['deleted_at'];
 
@@ -26,5 +27,9 @@ class Post extends Model
 
     public function photos() {
         return $this->morphMany(Photo::class, 'imageable');
+    }
+
+    public function getPathAttribute($value) {
+        return $this->directory . $value;
     }
 }
